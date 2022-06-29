@@ -340,19 +340,24 @@ export function Field (props) {
         setMask(() => new Array(props.size * props.size).fill(Mask.Fill))
     }
 
+    const aroundTransparentNumber = []
+    let flagsAroundCounter = 0
+
+    function searchMinesAround(x, y, array) {
+        chooseAround(x, y, array)
+        while(array.length) {
+            const [x, y] = array.pop()
+
+            if (mask[y * props.size + x] !== Mask.Flag) continue
+
+            flagsAroundCounter++
+        }
+    }
+
     function onMouseDown (e) {
 
         if (field[Number(e.target.dataset.y) * props.size + Number(e.target.dataset.x)] > 0 && mask[Number(e.target.dataset.y) * props.size + Number(e.target.dataset.x)] === Mask.Transparent) {
-            const aroundTransparentNumber = []
-            let flagsAroundCounter = 0
-            chooseAround(Number(e.target.dataset.x), Number(e.target.dataset.y), aroundTransparentNumber)
-            while(aroundTransparentNumber.length) {
-                const [x, y] = aroundTransparentNumber.pop()
-
-                if (mask[y * props.size + x] !== Mask.Flag) continue
-
-                flagsAroundCounter++
-            }
+            searchMinesAround(Number(e.target.dataset.x), Number(e.target.dataset.y), aroundTransparentNumber)
             if (Number(e.target.dataset.value) === flagsAroundCounter) {
                 chooseAround(Number(e.target.dataset.x), Number(e.target.dataset.y), aroundTransparentNumber)
                 while(aroundTransparentNumber.length) {
@@ -396,16 +401,7 @@ export function Field (props) {
 
     function onMouseUp (e) {
         if (field[Number(e.target.dataset.y) * props.size + Number(e.target.dataset.x)] > 0 && mask[Number(e.target.dataset.y) * props.size + Number(e.target.dataset.x)] === Mask.Transparent) {
-            const aroundTransparentNumber = []
-            let flagsAroundCounter = 0
-            chooseAround(Number(e.target.dataset.x), Number(e.target.dataset.y), aroundTransparentNumber)
-            while(aroundTransparentNumber.length) {
-                const [x, y] = aroundTransparentNumber.pop()
-
-                if (mask[y * props.size + x] !== Mask.Flag) continue
-
-                flagsAroundCounter++
-            }
+            searchMinesAround(Number(e.target.dataset.x), Number(e.target.dataset.y), aroundTransparentNumber)
             if (Number(e.target.dataset.value) !== flagsAroundCounter) {
                 chooseAround(Number(e.target.dataset.x), Number(e.target.dataset.y), aroundTransparentNumber)
                 while(aroundTransparentNumber.length) {
