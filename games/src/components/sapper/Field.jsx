@@ -5,7 +5,7 @@ import {MineComponent} from "./MineComponent";
 
 const Mine = -1
 
-function createField(size) {
+function createField(size, mines) {
     const field = new Array(size * size).fill(0)
 
     function inc(x, y) {
@@ -16,7 +16,7 @@ function createField(size) {
         }
     }
 
-    for (let i = 0; i < size;) {
+    for (let i = 0; i < mines;) {
         const x = Math.floor(Math.random() * size)
         const y = Math.floor(Math.random() * size)
 
@@ -67,9 +67,9 @@ export function Field (props) {
     const [faceClicked, setFaceClicked] = useState(false)
     const [timerActive, setTimerActive] = useState(false)
     const [seconds, setSeconds] = useState(0)
-    const [flags, setFlags] = useState(props.size)
+    const [flags, setFlags] = useState(props.mines)
     const [lose, setLose] = useState(false)
-    const [field, setField] = useState(() => createField(props.size))
+    const [field, setField] = useState(() => createField(props.size, props.mines))
     const [mask, setMask] = useState(() => new Array(props.size * props.size).fill(Mask.Fill))
 
     let win = useMemo(() => !field.some((f, i) => flags !== 0 || f === Mine && mask[i] !== Mask.Flag || f !== Mine && mask[i] === Mask.Flag), [field, mask, flags])
@@ -286,7 +286,7 @@ export function Field (props) {
             setTimerActive(true)
         }
 
-        setFlags(props.size - countFlags)
+        setFlags(props.mines - countFlags)
 
         setMask((prev) => [...prev])
     }
@@ -313,7 +313,7 @@ export function Field (props) {
             }
         })
 
-        setFlags(props.size - countFlags)
+        setFlags(props.mines - countFlags)
 
         setMask((prev) => [...prev])
     }
@@ -334,9 +334,9 @@ export function Field (props) {
         setFaceClicked(false)
         setTimerActive(false)
         setSeconds(0)
-        setFlags(props.size)
+        setFlags(props.mines)
         setLose(false)
-        setField(() => createField(props.size))
+        setField(() => createField(props.size, props.mines))
         setMask(() => new Array(props.size * props.size).fill(Mask.Fill))
     }
 

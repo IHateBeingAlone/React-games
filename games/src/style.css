@@ -1,7 +1,29 @@
 h1,
-p {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+p,
+a {
+  font-family: sans-serif;
+}
+
+a {
+  color: #000000;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+}
+
+a::after {
+  content: '';
+  height: 2px;
+  width: 0;
+  background: #000000;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: 0.4s;
+}
+
+a:hover:after {
+  width: 100%;
 }
 
 body {
@@ -13,13 +35,34 @@ body {
   user-select: none;
 }
 
+.header {
+  width: 100%;
+  display: flex;
+  column-gap: 60px;
+  justify-content: center;
+  padding: 30px 0;
+  background: #C7C7C7;
+}
+
+.header-link {
+  font-weight: 700;
+  font-size: 24px;
+}
+
 .games {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #232323;
+}
+
+.games > .wrapper {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #232323;
 }
 
 .field {
@@ -73,6 +116,11 @@ body {
 }
 .field-row-item[data-value='4'] {
   background: url(../public/assets/images/4.png) 0 0 no-repeat;
+  background-size: cover;
+}
+
+.field-row-item[data-value='5'] {
+  background: url(../public/assets/images/5.png) 0 0 no-repeat;
   background-size: cover;
 }
 
@@ -130,4 +178,165 @@ body {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.twentyFortyEight {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper-2048 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.board {
+  font-family: clear sans,helvetica neue,Arial,sans-serif;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  position: relative;
+  padding: 12px;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -ms-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
+  background: #bbada0;
+  border-radius: 6px;
+  width: 500px;
+  height: 500px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.board-row {
+  display: flex;
+  column-gap: 12px;
+  width: 100%;
+}
+
+.board-row-item {
+  display: flex;
+}
+
+.cell {
+  background: rgba(238,228,218,.35);
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile {
+  color: #ffffff;
+  background: #000000;
+  box-shadow: unset;
+  font-size: 27px;
+  line-height: 98px;
+  font-weight: 700;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.tile-2 {
+  color: #776e65;
+  background: #eee4da;
+  box-shadow: 0 0 30px 10px transparent, inset 0 0 0 1px transparent;
+  font-size: 53px;
+}
+
+.tile-4 {
+  color: #776e65;
+  background: #ede0c8;
+  box-shadow: 0 0 30px 10px transparent, inset 0 0 0 1px transparent;
+  font-size: 53px;
+}
+
+.tile-8 {
+  color: #f9f6f2;
+  background: #f2b179;
+  font-size: 53px;
+}
+
+.tile-16 {
+  color: #f9f6f2;
+  background: #f59563;
+  font-size: 53px;
+}
+
+.tile-32 {
+  color: #f9f6f2;
+  background: #f67c5f;
+  font-size: 53px;
+}
+
+.tile-64 {
+  color: #f9f6f2;
+  background: #f65e3b;
+  font-size: 53px;
+}
+
+.tile-128 {
+  color: #f9f6f2;
+  background: #edcf72;
+  box-shadow: 0 0 30px 10px rgb(243 215 116 / 24%), inset 0 0 0 1px rgb(255 255 255 / 14%);
+  font-size: 45px;
+}
+
+.tile-256 {
+  color: #f9f6f2;
+  background: #edcc61;
+  box-shadow: 0 0 30px 10px rgb(243 215 116 / 32%), inset 0 0 0 1px rgb(255 255 255 / 19%);
+  font-size: 45px;
+}
+
+.tile-512 {
+  color: #f9f6f2;
+  background: #edc850;
+  box-shadow: 0 0 30px 10px rgb(243 215 116 / 40%), inset 0 0 0 1px rgb(255 255 255 / 24%);
+  font-size: 45px;
+}
+
+.tile-1024 {
+  color: #f9f6f2;
+  background: #edc53f;
+  box-shadow: 0 0 30px 10px rgb(243 215 116 / 48%), inset 0 0 0 1px rgb(255 255 255 / 29%);
+  font-size: 35px;
+}
+
+.tile-2048 {
+  color: #f9f6f2;
+  background: #edc22e;
+  box-shadow: 0 0 30px 10px rgb(243 215 116 / 56%), inset 0 0 0 1px rgb(255 255 255 / 33%);
+  font-size: 35px;
+}
+
+.tile-4096 {
+  color: #ffffff;
+  background: #000000;
+  box-shadow: unset;
+  font-size: 35px;
+}
+
+.tile-8192 {
+  color: #ffffff;
+  background: #000000;
+  box-shadow: unset;
+  font-size: 35px;
 }

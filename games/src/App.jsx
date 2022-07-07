@@ -1,13 +1,15 @@
-import React from "react";
-import { useState } from 'react';
-import { Sapper } from "./components/sapper/Sapper";
-import "./style.css";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom'
+import { Wrapper } from './components/Wrapper';
+import './style.css';
 
 export default function App() {
 
   return (
       <div className="games">
-        <Sapper/>
+          <BrowserRouter>
+              <Wrapper/>
+          </BrowserRouter>
       </div>
   );
 }
